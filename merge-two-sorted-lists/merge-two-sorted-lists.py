@@ -7,7 +7,6 @@ class Solution:
 
     def __init__(self):
         self.head = None
-        self.ptr = None
 
     def mergeTwoLists(self, list1: ListNode, list2: ListNode) -> ListNode:
         if list1 is None and list2 is None:
@@ -17,38 +16,29 @@ class Solution:
         if list1 is None and list2 is not None:
             return list2
 
-        pointer_list1 = list1
-        pointer_list2 = list2
-
-        if pointer_list1.val<pointer_list2.val:
-            self.head = pointer_list1
-            self.ptr = self.head
-            pointer_list1 = pointer_list1.next
+        if list1.val<list2.val:
+            self.head = list1
+            list1 = list1.next
         else:
-            self.head = pointer_list2
-            self.ptr = self.head
-            pointer_list2 = pointer_list2.next
+            self.head = list2
+            list2 = list2.next
 
+        ptr = self.head
 
-        while pointer_list1 and pointer_list2:
-            if pointer_list1.val<pointer_list2.val:
-                self.ptr.next = pointer_list1 
-                pointer_list1 = pointer_list1.next
-                self.ptr = self.ptr.next
+        while list1 and list2:
+            if list1.val<list2.val:
+                ptr.next = list1 
+                list1 = list1.next
             else:
-                self.ptr.next = pointer_list2
-                self.ptr = self.ptr.next
-                pointer_list2 = pointer_list2.next
+                ptr.next = list2
+                list2 = list2.next
+            ptr = ptr.next
         
-        while pointer_list1:
-            self.ptr.next = pointer_list1
-            self.ptr = self.ptr.next
-            pointer_list1 = pointer_list1.next
+        if list1:
+            ptr.next = list1
             
-        while pointer_list2:
-            self.ptr.next = pointer_list2
-            self.ptr = self.ptr.next
-            pointer_list2 = pointer_list2.next
+        if list2:
+            ptr.next = list2
         
         return self.head
         
