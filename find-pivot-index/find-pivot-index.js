@@ -4,12 +4,16 @@
  */
 var pivotIndex = function(nums) {
     const totalSum = nums.reduce((a,b)=>(a+b),0);
+    const leftSums = []
     
     for(let i=0;i<nums.length;i++){
-        const leftArr = nums.slice(0,i);
-        const leftSum = leftArr.reduce((a,b)=>(a+b),0);
-        const rightSum = totalSum - leftSum - nums[i];
-        if(leftSum === rightSum){
+        if(i==0){
+            leftSums.push(0);
+        }else{
+            leftSums.push(leftSums[i-1]+nums[i-1])
+        }
+        const rightSum = totalSum - leftSums[i] - nums[i];
+        if(leftSums[i]  === rightSum){
             return i
         }
     }
