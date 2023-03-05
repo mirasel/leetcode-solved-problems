@@ -8,13 +8,11 @@ var twoSum = function(numbers, target) {
     
     while(i<j){
         if(numbers[i]+numbers[j]===target){
-            break
+            return [i+1,j+1];
         }else if(numbers[i]+numbers[j]>target){
             j--;
         }else{
             i++;
         }
     }
-    
-    return [i+1,j+1];
 };
